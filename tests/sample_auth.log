@@ -1,0 +1,30 @@
+2026-04-10 02:13:01 Failed password for root from 192.168.1.105 port 22 ssh2
+2026-04-10 02:13:03 Failed password for root from 192.168.1.105 port 22 ssh2
+2026-04-10 02:13:05 Failed password for admin from 192.168.1.105 port 22 ssh2
+2026-04-10 02:13:07 Failed password for ubuntu from 192.168.1.105 port 22 ssh2
+2026-04-10 02:13:09 Failed password for root from 192.168.1.105 port 22 ssh2
+2026-04-10 02:13:11 Failed password for root from 192.168.1.200 port 22 ssh2
+2026-04-10 02:13:13 Failed password for admin from 192.168.1.200 port 22 ssh2
+2026-04-10 02:13:15 Accepted password for ubuntu from 10.0.0.5 port 22 ssh2
+2026-04-10 02:14:01 sudo: ubuntu: TTY=pts/0; PWD=/home/ubuntu; USER=root; COMMAND=/bin/bash
+2026-04-10 02:14:05 sudo: ubuntu: TTY=pts/0; PWD=/home/ubuntu; USER=root; COMMAND=/etc/passwd
+2026-04-10 03:00:01 Connection from 203.0.113.45 port 4444 rejected
+2026-04-10 03:00:02 Connection from 203.0.113.45 port 4445 rejected
+2026-04-10 03:00:03 Connection from 203.0.113.45 port 4446 rejected
+2026-04-10 03:00:04 Connection from 203.0.113.45 port 8080 rejected
+2026-04-10 03:00:05 Connection from 203.0.113.45 port 9090 rejected
+2026-04-10 03:00:06 Connection from 203.0.113.45 port 3306 rejected
+2026-04-10 03:01:00 CRON: pam_unix(cron:session): session opened for user root
+2026-04-10 03:01:01 CRON: pam_unix(cron:session): session opened for user root
+2026-04-10 03:01:02 CRON: pam_unix(cron:session): session opened for user root
+2026-04-10 04:00:00 sshd: Accepted publickey for deploy from 10.0.0.1 port 22 ssh2
+2026-04-10 04:00:01 sshd: Accepted publickey for deploy from 10.0.0.1 port 22 ssh2
+2026-04-10 04:15:00 kernel: UFW BLOCK IN=eth0 OUT= SRC=198.51.100.10 DST=10.0.0.5 PROTO=TCP DPT=22
+2026-04-10 04:15:01 kernel: UFW BLOCK IN=eth0 OUT= SRC=198.51.100.10 DST=10.0.0.5 PROTO=TCP DPT=22
+2026-04-10 04:15:02 kernel: UFW BLOCK IN=eth0 OUT= SRC=198.51.100.10 DST=10.0.0.5 PROTO=TCP DPT=3306
+2026-04-10 04:15:03 kernel: UFW BLOCK IN=eth0 OUT= SRC=198.51.100.11 DST=10.0.0.5 PROTO=TCP DPT=22
+2026-04-10 05:00:00 Failed password for invalid user test from 172.16.0.50 port 22 ssh2
+2026-04-10 05:00:01 Failed password for invalid user guest from 172.16.0.50 port 22 ssh2
+2026-04-10 05:00:02 Failed password for invalid user pi from 172.16.0.50 port 22 ssh2
+2026-04-10 06:00:00 Accepted password for admin from 10.0.0.20 port 22 ssh2
+2026-04-10 06:01:00 sudo: admin: command not allowed

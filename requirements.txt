@@ -1,0 +1,6 @@
+google-genai
+typer
+rich
+pandas
+python-dotenv
+scikit-learn

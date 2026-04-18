@@ -62,6 +62,12 @@ def cluster(
             console.print(content)
 
 
+SEV_COLORS = {
+    "critical": "bold red", "high": "red",
+    "medium": "yellow", "low": "green", "info": "white",
+}
+
+
 def _print_table(clusters, total: int):
     table = Table(
         box=box.ROUNDED,
@@ -69,19 +75,22 @@ def _print_table(clusters, total: int):
         title=f"Log Cluster Report — {total} entries -> {len(clusters)} clusters"
     )
     table.add_column("#", width=4)
+    table.add_column("Sev", width=8)
     table.add_column("Size", width=6)
-    table.add_column("Label / Top Terms", width=35)
-    table.add_column("Unique IPs", width=12)
-    table.add_column("Sample Entry", width=50)
+    table.add_column("Label / Top Terms", width=32)
+    table.add_column("IPs", width=5)
+    table.add_column("Sample Entry", width=48)
 
     for i, cl in enumerate(clusters, 1):
         label = cl.label or ", ".join(cl.top_terms[:3])
+        color = SEV_COLORS.get(cl.severity, "white")
         table.add_row(
             str(i),
+            f"[{color}]{cl.severity.upper()}[/{color}]",
             str(cl.size),
             label,
             str(len(cl.unique_ips)),
-            cl.sample[:80],
+            cl.sample[:60],
         )
 
     console.print(table)

@@ -3,12 +3,30 @@ from dataclasses import dataclass, field
 from ingestor import LogEntry
 
 
+SEVERITY_KEYWORDS = {
+    "critical": ["mimikatz", "lsass", "credential", "dump", "privilege", "escalat", "rootkit", "ransomware"],
+    "high":     ["failed password", "brute", "invalid user", "unauthorized", "exploit", "payload",
+                 "reverse shell", "c2", "beacon", "exfil", "malware", "backdoor"],
+    "medium":   ["scan", "probe", "reject", "block", "deny", "suspicious", "anomal", "lateral"],
+    "low":      ["warn", "timeout", "retry", "disconnect"],
+}
+
+
+def _score_severity(entries: list[LogEntry]) -> str:
+    text = " ".join(e.message.lower() for e in entries)
+    for level, keywords in SEVERITY_KEYWORDS.items():
+        if any(k in text for k in keywords):
+            return level
+    return "info"
+
+
 @dataclass
 class Cluster:
     id: int
     entries: list[LogEntry] = field(default_factory=list)
     label: str = ""
     top_terms: list[str] = field(default_factory=list)
+    severity: str = "info"
 
     @property
     def size(self) -> int:
@@ -108,6 +126,8 @@ def cluster(entries: list[LogEntry], n_clusters: int = 10) -> list[Cluster]:
             clusters[label] = Cluster(id=label)
         clusters[label].entries.append(entries[i])
 
+    SEVERITY_ORDER = ["critical", "high", "medium", "low", "info"]
+
     for cid, cl in clusters.items():
         doc_indices = [i for i, l in enumerate(labels) if l == cid]
         term_scores = {}
@@ -115,5 +135,9 @@ def cluster(entries: list[LogEntry], n_clusters: int = 10) -> list[Cluster]:
             for j, term in enumerate(vocab):
                 term_scores[term] = term_scores.get(term, 0) + matrix[idx][j]
         cl.top_terms = sorted(term_scores, key=term_scores.get, reverse=True)[:5]
+        cl.severity = _score_severity(cl.entries)
 
-    return sorted(clusters.values(), key=lambda c: c.size, reverse=True)
+    return sorted(
+        clusters.values(),
+        key=lambda c: (SEVERITY_ORDER.index(c.severity), -c.size)
+    )
